@@ -560,8 +560,8 @@ MonoBehaviour:
   - {fileID: 1553743396433462753, guid: 7435b945f33eb644b9a05b8311ec5704, type: 3}
   - {fileID: 5485950872123747698, guid: 34b5566d482deaf478a7b19cbf565690, type: 3}
   - {fileID: 4235893485642662033, guid: 758ce5e93b2782a4ab1856f05f2d6815, type: 3}
-  rows: 4
-  columns: 4
+  rows: 3
+  columns: 3
 --- !u!1 &1639049645
 GameObject:
   m_ObjectHideFlags: 0

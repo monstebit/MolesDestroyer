@@ -111,5 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731ec3ef9bea66340bfeb6b07cbfb91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 10
+  _disappearanceTime: 4.5
+  _scoreCount: 10
+  _incomingDamage: 10
   Explosion: {fileID: 3017786358771356576, guid: 1bf15eeef2e21c443ab7e812113d4ed9, type: 3}
-  _value: 5
