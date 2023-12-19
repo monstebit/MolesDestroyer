@@ -58,7 +58,7 @@ namespace YK
                 GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
 
                 //  DISAPPEARANCE TIME
-                Enemy newMoplecomponent = moleInstance.GetComponent<Enemy>();
+                Enemy newMoplecomponent = moleInstance.GetComponent<Enemy>();   //  UPCASTING
                 float newMoleDisappearanceTime = newMoplecomponent.DisappearanceTime;
 
                 //  DELETE LAST MOLE SPAWN POINT

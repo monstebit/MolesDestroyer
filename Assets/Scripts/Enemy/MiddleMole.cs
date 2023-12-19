@@ -10,7 +10,11 @@ namespace YK
             Health = 20;
             DisappearanceTime = 3.5f;
             ScoreCount = 20;
-            IncomingDamage = 10;
+        }
+
+        public MiddleMole(int incomingDamage) : base(incomingDamage)
+        {
+
         }
 
         private void OnMouseDown()

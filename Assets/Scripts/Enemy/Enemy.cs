@@ -7,14 +7,13 @@ namespace YK
 {
     public abstract class Enemy : MonoBehaviour
     {
+        [Header("Particles")]
+        [SerializeField] public ParticleSystem Explosion;
+
         [Header("Enemy Stats")]
         [SerializeField] private int _health;
         [SerializeField] private float _disappearanceTime;
         [SerializeField] private int _scoreCount;
-        [SerializeField] private int _incomingDamage;
-
-        [Header("Particles")]
-        [SerializeField] public ParticleSystem Explosion;
 
         public int Health
         {
@@ -61,49 +60,41 @@ namespace YK
                 }
             }
         }
-        public int IncomingDamage
+        public int IncomingDamage { get; set; } = 10;
+
+        public Enemy() { }
+
+        public Enemy(int incomingDamage)
         {
-            get { return _incomingDamage; }
-            set
-            {
-                if (value >= 0)
-                {
-                    _incomingDamage = value;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value));
-                }
-            }
+            IncomingDamage = incomingDamage;
         }
 
-        public void DecreaseHealth(int damage)
+        private void OnMouseDown()
+        {
+            DecreaseHealth(IncomingDamage);
+        }
+
+        protected void DecreaseHealth(int damage)
         {
             Health -= damage;
 
             if (Health <= 0)
             {
+                Destroy(gameObject);
                 ParticlesExplode();
-                AddScore();
+
+                //  ADD SCORE
+                EventManager.OnEnemyDied(ScoreCount);
             }
         }
 
-        public void ParticlesExplode()
+        protected void ParticlesExplode()
         {
             if (Explosion != null)
             {
                 ParticleSystem explosionInstance = Instantiate(Explosion, transform.position, Quaternion.identity);
                 explosionInstance.Play();
-
-                Destroy(gameObject);
             }
-        }
-
-        //  SCORE
-        public void AddScore()
-        {
-            ScoreManager.instance.GetScore(ScoreCount);
-            Destroy(gameObject);
         }
     }
 }

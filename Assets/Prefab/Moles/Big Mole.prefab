@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3202439664789488738}
   - component: {fileID: 5548534659695882623}
   - component: {fileID: 963035801269995747}
+  - component: {fileID: -5342569270802994990}
   m_Layer: 0
   m_Name: Big Mole
   m_TagString: Untagged
@@ -111,8 +112,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710bbf511ae846e429c04096255e625d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreManager: {fileID: -5342569270802994990}
+  Explosion: {fileID: 3017786358771356576, guid: 1bf15eeef2e21c443ab7e812113d4ed9, type: 3}
   _health: 30
   _disappearanceTime: 6.5
   _scoreCount: 30
   _incomingDamage: 10
-  Explosion: {fileID: 3017786358771356576, guid: 1bf15eeef2e21c443ab7e812113d4ed9, type: 3}
+--- !u!114 &-5342569270802994990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553743396433462753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc7ba05d45d61249a51af7706eebf21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

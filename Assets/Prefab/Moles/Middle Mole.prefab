@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2219762962971454560}
   - component: {fileID: 7194607734330463994}
   - component: {fileID: 2421177571603105649}
+  - component: {fileID: -5078720495747731460}
   m_Layer: 0
   m_Name: Middle Mole
   m_TagString: Untagged
@@ -111,8 +112,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5ec1065b2d0ed448a9806986630887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreManager: {fileID: -5078720495747731460}
+  Explosion: {fileID: 3017786358771356576, guid: 1bf15eeef2e21c443ab7e812113d4ed9, type: 3}
   _health: 20
   _disappearanceTime: 3.5
   _scoreCount: 20
   _incomingDamage: 10
-  Explosion: {fileID: 3017786358771356576, guid: 1bf15eeef2e21c443ab7e812113d4ed9, type: 3}
+--- !u!114 &-5078720495747731460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5485950872123747698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc7ba05d45d61249a51af7706eebf21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

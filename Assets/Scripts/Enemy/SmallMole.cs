@@ -10,12 +10,11 @@ namespace YK
             Health = 10;
             DisappearanceTime = 4.5f;
             ScoreCount = 10;
-            IncomingDamage = 10;
         }
 
-        private void OnMouseDown()
+        public SmallMole(int incomingDamage) : base(incomingDamage) 
         {
-            DecreaseHealth(IncomingDamage);
+            
         }
     }
 }
