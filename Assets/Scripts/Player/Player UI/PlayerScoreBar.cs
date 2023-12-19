@@ -1,11 +1,9 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace YK
 {
-    public class ScoreView : MonoBehaviour
+    public class PlayerScoreBar : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
 
@@ -14,6 +12,8 @@ namespace YK
         void Start()
         {
             EventManager.EnemyDied += OnEnemyDied;
+
+            _scoreText.text = "SCORE IS: " + _score;
         }
 
         private void OnDestroy()
@@ -26,7 +26,7 @@ namespace YK
             if (_scoreText != null)
             {
                 _score += scoreCount;
-                _scoreText.text = "Score :" + _score;
+                _scoreText.text = "SCORE: " + _score;
             }
         }
     }

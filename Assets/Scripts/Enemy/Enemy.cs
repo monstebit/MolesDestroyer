@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace YK
@@ -11,18 +9,19 @@ namespace YK
         [SerializeField] public ParticleSystem Explosion;
 
         [Header("Enemy Stats")]
-        [SerializeField] private int _health;
+        [SerializeField] private int _maxHealth;
+        private int _currentHealth;
         [SerializeField] private float _disappearanceTime;
-        [SerializeField] private int _scoreCount;
+        [SerializeField] private int _scoreValue;
 
-        public int Health
+        public int MaxHealth
         {
-            get { return _health; }
+            get { return _maxHealth; }
             set
             {
                 if (value >= 0)
                 {
-                    _health = value;
+                    _maxHealth = value;
                 }
                 else
                 {
@@ -30,6 +29,16 @@ namespace YK
                 }
             }
         }
+
+        public int CurrentHealth
+        {
+            get { return _currentHealth; }
+            set
+            {
+                _currentHealth = value;
+            }
+        }
+
         public float DisappearanceTime
         {
             get { return _disappearanceTime; }
@@ -45,14 +54,15 @@ namespace YK
                 }
             }
         }
-        public int ScoreCount
+
+        public int ScoreValue
         {
-            get { return _scoreCount; }
+            get { return _scoreValue; }
             set
             {
                 if (value >= 0)
                 {
-                    _scoreCount = value;
+                    _scoreValue = value;
                 }
                 else
                 {
@@ -60,6 +70,7 @@ namespace YK
                 }
             }
         }
+
         public int IncomingDamage { get; set; } = 10;
 
         public Enemy() { }
@@ -69,22 +80,29 @@ namespace YK
             IncomingDamage = incomingDamage;
         }
 
-        private void OnMouseDown()
+        protected void Start()
         {
-            DecreaseHealth(IncomingDamage);
+            _currentHealth = MaxHealth;
         }
 
-        protected void DecreaseHealth(int damage)
+        protected void OnMouseDown()
         {
-            Health -= damage;
+            ApplyDamage(IncomingDamage);
+        }
 
-            if (Health <= 0)
+        public void ApplyDamage(int damageValue)
+        {
+            _currentHealth -= damageValue;
+            Debug.Log("Enemy current health is: " + _currentHealth);
+
+            if (_currentHealth <= 0)
             {
                 Destroy(gameObject);
                 ParticlesExplode();
 
                 //  ADD SCORE
-                EventManager.OnEnemyDied(ScoreCount);
+                EventManager.OnEnemyDied(ScoreValue);
+                Debug.Log("+" + ScoreValue);
             }
         }
 
