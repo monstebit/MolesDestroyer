@@ -5,7 +5,7 @@ namespace YK
         public EnemyMiddleMole()
         {
             MaxHealth = 20;
-            DisappearanceTime = 3.5f;
+            DisappearanceTime = 2.5f;
             ScoreValue = 20;
         }
 

@@ -5,7 +5,7 @@ namespace YK
         public EnemyBigMole()
         {
             MaxHealth = 30;
-            DisappearanceTime = 6.5f;
+            DisappearanceTime = 3.5f;
             ScoreValue = 30;
         }
 

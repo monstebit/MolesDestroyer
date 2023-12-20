@@ -13,6 +13,7 @@ namespace YK
         private int _currentHealth;
         [SerializeField] private float _disappearanceTime;
         [SerializeField] private int _scoreValue;
+        //  ADD DAMAGE * DISSAPEARANCE TIME?
 
         public int MaxHealth
         {

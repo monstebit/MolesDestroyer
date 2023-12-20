@@ -13,7 +13,7 @@ namespace YK
         {
             EventManager.EnemyDied += OnEnemyDied;
 
-            _scoreText.text = "SCORE IS: " + _score;
+            _scoreText.text = "SCORE: " + _score;
         }
 
         private void OnDestroy()

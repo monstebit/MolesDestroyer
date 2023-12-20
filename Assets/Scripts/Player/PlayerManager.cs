@@ -43,10 +43,8 @@ namespace YK
 
             if (_currentHealth <= 0)
             {
-                Debug.Log("You dead");
-            }
-
-            
+                //  YOU DEAD               
+            }           
         }
     }
 }

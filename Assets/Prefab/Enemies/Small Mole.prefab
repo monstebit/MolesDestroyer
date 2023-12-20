@@ -112,6 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Explosion: {fileID: 3017786358771356576, guid: 1bf15eeef2e21c443ab7e812113d4ed9, type: 3}
-  _health: 10
-  _disappearanceTime: 4.5
-  _scoreCount: 10
+  _maxHealth: 10
+  _disappearanceTime: 1.5
+  _scoreValue: 10
