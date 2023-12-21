@@ -1646,8 +1646,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2134602425}
-        m_TargetAssemblyTypeName: YK.MainMenuManager, Assembly-CSharp
-        m_MethodName: StartHPMod
+        m_TargetAssemblyTypeName: YK.TitleScreenAndGameModeManager, Assembly-CSharp
+        m_MethodName: StartHealthGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1816,8 +1816,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2134602425}
-        m_TargetAssemblyTypeName: YK.MainMenuManager, Assembly-CSharp
-        m_MethodName: StartTimerMod
+        m_TargetAssemblyTypeName: YK.TitleScreenAndGameModeManager, Assembly-CSharp
+        m_MethodName: StartTimerGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1912,7 +1912,7 @@ GameObject:
   - component: {fileID: 1637382074}
   - component: {fileID: 1637382075}
   m_Layer: 0
-  m_Name: Grid & Mole Spawn Manager
+  m_Name: Grids & Moles Spawn Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1945,8 +1945,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9733347ab2bbe644a556b1d83babd57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridPrefab: {fileID: 7109978327368653945, guid: b21c0d20262affe4da3d987cdbd90ece, type: 3}
-  _molePrefab:
+  _grid: {fileID: 7109978327368653945, guid: b21c0d20262affe4da3d987cdbd90ece, type: 3}
+  _mole:
   - {fileID: 8343395192941160300, guid: 7435b945f33eb644b9a05b8311ec5704, type: 3}
   - {fileID: 4539774046751221381, guid: 34b5566d482deaf478a7b19cbf565690, type: 3}
   - {fileID: 4234337510616468481, guid: 758ce5e93b2782a4ab1856f05f2d6815, type: 3}
@@ -2263,7 +2263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169fef33ca472e64383ab259139e5d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _remainingSeconds: 10
+  _remainingSeconds: 5
   _timerText: {fileID: 1777667683}
 --- !u!1 &2032925173
 GameObject:
@@ -2418,8 +2418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameMode: 0
-  _spawnManager: {fileID: 1637382071}
-  worldSceneIndex: 0
+  _gridsAndMolesSpawnManager: {fileID: 1637382071}
   _healthModeButton: {fileID: 1613010251}
   _timerModeButton: {fileID: 1613010251}
   _scoreStatusBar: {fileID: 1227348528}

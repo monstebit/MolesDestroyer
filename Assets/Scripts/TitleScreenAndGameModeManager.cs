@@ -8,9 +8,10 @@ namespace YK
     {
         public static TitleScreenAndGameModeManager Instance;
 
-        public GameMode currentGameMode;
+        public GameMode currentGameMode = GameMode.NO_MODE;
 
-        [SerializeField] private GameObject _spawnManager;
+        [Header("Grids & Moles Spawner")]
+        [SerializeField] private GameObject _gridsAndMolesSpawnManager;
 
         [Header("Buttons")]
         [SerializeField] private Button _healthModeButton;
@@ -33,9 +34,9 @@ namespace YK
             }
         }
 
-        private void ActivateGridAndMoleSpawner()
+        private void ActivateGridsAndMoleSpawner()
         {
-            _spawnManager.SetActive(true);
+            _gridsAndMolesSpawnManager.SetActive(true);
         }
 
         public void StartHealthGameMode()
@@ -49,7 +50,7 @@ namespace YK
             _healthStatusBar.SetActive(true);
             _timerStatusBar.SetActive(false);  
 
-            ActivateGridAndMoleSpawner();
+            ActivateGridsAndMoleSpawner();
         }
 
         public void StartTimerGameMode()
@@ -64,7 +65,7 @@ namespace YK
             _healthStatusBar.SetActive(false);
             _timerStatusBar.SetActive(true);
 
-            ActivateGridAndMoleSpawner();
+            ActivateGridsAndMoleSpawner();
         }
 
         public void RestartGame()

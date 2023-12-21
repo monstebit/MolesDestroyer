@@ -1,32 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace YK
 {
-    public class GridAndMoleSpawnManager : MonoBehaviour
+    public class GridsAndMolesSpawnManager : MonoBehaviour
     {
-        private List<Transform> _gridTransforms = new List<Transform>();
+        [Header("Prefab")]
+        [SerializeField] private GameObject _grid;
+        [SerializeField] private List<GameObject> _mole;
 
-        [SerializeField] private GameObject _gridPrefab;
-        [SerializeField] private List<GameObject> _molePrefab;
-
+        [Header("Grid")]
         //  TO DO: ADD CHECK FOR NULL
+        private List<Transform> _gridTransforms = new List<Transform>();
         [SerializeField] private int _rowValue = 3;
         [SerializeField] private int _columnValue = 3;
 
+        [Header("Mole")]
         [SerializeField] private int _moleAnount = 3;
+
+        [Header("Coroutine Time")]
         //  TO DO: FIX IT
         private float firstMoleSpawnTimer = 2f;
         private float restoreMoleSpawnPointTimer = 2.5f;
 
         private void Start()
         {
-            SpawnGrid();
-            StartCoroutine(FirstMoleSpawnAfterDelay());
+            SpawnGrids();
+            StartCoroutine(FirstMoleSpawnAfterDelay()); //  TO DO: FIX IT
         }
 
-        private void SpawnGrid()
+        private void SpawnGrids()
         {
             GameObject[,] grids = new GameObject[_rowValue, _columnValue];
 
@@ -34,7 +40,7 @@ namespace YK
             {
                 for (int j = 0; j < _columnValue; j++)
                 {
-                    GameObject gridInstance = Instantiate(_gridPrefab);
+                    GameObject gridInstance = Instantiate(_grid);
 
                     gridInstance.transform.position = new Vector3(i * 2.0f, 0, j * 2.0f);
                     _gridTransforms.Add(gridInstance.transform);
@@ -44,7 +50,29 @@ namespace YK
             }
         }
 
-        //  TO DO: FIX IT
+        private GameObject GetRandomMole(List<GameObject> moles)
+        {
+            if (moles == null)
+                throw new ArgumentNullException(nameof(moles), "The 'moles' list cannot be null.");
+
+
+            if (moles.Count == 0)
+                throw new ArgumentException("The 'moles' list cannot be empty.", nameof(moles));
+
+
+            int randomIndex = Random.Range(0, moles.Count);
+            return moles[randomIndex];
+        }
+
+        private Transform GetRandomSpawnPoint()
+        {
+            int randomIndex = Random.Range(0, _gridTransforms.Count);
+            Transform randomTransform = _gridTransforms[randomIndex]; 
+
+            return randomTransform;
+        }
+
+        //  COROUTINES
         private IEnumerator MolesSpawn()
         {
             // ожидаем 1 секунду
@@ -54,7 +82,7 @@ namespace YK
             {
                 Transform randomSpawnPoint = GetRandomSpawnPoint();
 
-                GameObject ramdomMole = GetRandomMole(_molePrefab);
+                GameObject ramdomMole = GetRandomMole(_mole);
                 GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
 
                 //  DISAPPEARANCE TIME
@@ -69,7 +97,6 @@ namespace YK
             }
         }
 
-        //  TO DO: FIX IT
         private IEnumerator FirstMoleSpawnAfterDelay()
         {
             while (true)
@@ -102,24 +129,5 @@ namespace YK
             _gridTransforms.Add(spawnPoint);
         }
 
-        private Transform GetRandomSpawnPoint()
-        {
-            int randomIndex = Random.Range(0, _gridTransforms.Count);
-            Transform randomTransform = _gridTransforms[randomIndex]; 
-
-            return randomTransform;
-        }
-
-        private GameObject GetRandomMole(List<GameObject> moles)
-        {
-            if (moles == null || moles.Count == 0)
-            {
-                Debug.LogWarning("The list of moles is empty or null.");
-                return null;
-            }
-
-            int randomIndex = Random.Range(0, moles.Count);
-            return moles[randomIndex];
-        }
     }
 }
