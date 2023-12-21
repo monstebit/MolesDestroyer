@@ -23,8 +23,8 @@ namespace YK
 
         [Header("Coroutine Time")]
         //  TO DO: FIX IT
-        private float firstMoleSpawnTimer = 2f;
-        private float restoreMoleSpawnPointTimer = 2.5f;
+        private float _firstMoleSpawnTimer = 2f;
+        private float _restoreMoleSpawnPointTimer = 2.5f;
 
         private void Start()
         {
@@ -76,7 +76,7 @@ namespace YK
         private IEnumerator MolesSpawn()
         {
             // ожидаем 1 секунду
-            yield return new WaitForSeconds(firstMoleSpawnTimer);
+            yield return new WaitForSeconds(_firstMoleSpawnTimer);
 
             for (int i = 0; i < _moleAnount; i++)
             {
@@ -85,7 +85,7 @@ namespace YK
                 GameObject ramdomMole = GetRandomMole(_mole);
                 GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
 
-                //  DISAPPEARANCE TIME
+                //  GET ENEMY DISAPPEARANCE TIME
                 Enemy newMoplecomponent = moleInstance.GetComponent<Enemy>();   //  UPCASTING
                 float newMoleDisappearanceTime = newMoplecomponent.DisappearanceTime;
 
@@ -102,7 +102,7 @@ namespace YK
             while (true)
             {
                 StartCoroutine(MolesSpawn());
-                yield return new WaitForSeconds(firstMoleSpawnTimer);
+                yield return new WaitForSeconds(_firstMoleSpawnTimer);
             }
         }
 
@@ -113,7 +113,7 @@ namespace YK
             // Удаляем префаб после задержки, но только если он был создан
             if (mole != null)
             {
-                //  PLAYER DAMAGED EVENT
+                //  ADD PLAYER DAMAGED EVENT
                 Enemy newMoplecomponent = mole.GetComponent<Enemy>();   //  UPCASTING
                 EventManager.OnPlayerDied(newMoplecomponent.MaxHealth);
 
@@ -123,9 +123,9 @@ namespace YK
 
         private IEnumerator RestoreSpawnPointAfterDelay(Transform spawnPoint)
         {
-            yield return new WaitForSeconds(restoreMoleSpawnPointTimer);
+            yield return new WaitForSeconds(_restoreMoleSpawnPointTimer);
 
-            // Добавляем точку обратно в список
+            //  ADD SPAWN POINT BACK TO THE LIST
             _gridTransforms.Add(spawnPoint);
         }
 
