@@ -7,18 +7,20 @@ namespace YK
     {
         [SerializeField] private TextMeshProUGUI _healthText;
 
-        [HideInInspector] private PlayerManager _playerManager;
+        [HideInInspector] private PlayerStatsManager _playerStatsManager;
 
         private void Awake()
         {
-            _playerManager = GetComponent<PlayerManager>();
+            _playerStatsManager = GetComponent<PlayerStatsManager>();
         }
 
         private void Start()
         {
+            _healthText.text = "HEALTH: " + _playerStatsManager.CurrentHealth.ToString();
+            Debug.Log("PlayerHealthBar START. CurrentHealth: " + _playerStatsManager.CurrentHealth);
+
             EventManager.PlayerDied += OnPlayerDied;
 
-            _healthText.text = "HEALTH: " + _playerManager.MaxHealth.ToString();
         }
 
         private void OnDestroy()
@@ -30,10 +32,9 @@ namespace YK
         {
             if (_healthText != null)
             {
-                _playerManager.MaxHealth -= enemyHealthValue;
-                _healthText.text = "HEALTH: " + _playerManager.MaxHealth;
+                _playerStatsManager.CurrentHealth -= enemyHealthValue;
+                _healthText.text = "HEALTH: " + _playerStatsManager.CurrentHealth;
             }
         }
-
     }
 }

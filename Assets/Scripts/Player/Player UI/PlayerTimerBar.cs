@@ -4,7 +4,7 @@ using YK;
 
 namespace SG
 {
-    public class Timer : MonoBehaviour
+    public class PlayerTimerBar : MonoBehaviour
     {
         [SerializeField] private float _remainingSeconds;
         [SerializeField] private TextMeshProUGUI _timerText;
@@ -23,7 +23,7 @@ namespace SG
             }
             else
             {
-                MainMenuManager.Instance.EndGame();
+                TitleScreenAndGameModeManager.Instance.RestartGame();
             }
         }
     }

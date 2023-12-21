@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace YK
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerStatsManager : MonoBehaviour
     {
-        [SerializeField] private int _maxHealth = 100;
+        [SerializeField] private int _maxHealth;
         private int _currentHealth;
 
         public float time = 60.0f; // время таймера в секундах
@@ -37,14 +37,25 @@ namespace YK
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             _currentHealth = _maxHealth;
+        }
 
+        private void Start()
+        {
             if (_currentHealth <= 0)
             {
                 //  YOU DEAD               
             }           
+        }
+
+        private void Update()
+        {
+            if (_currentHealth <= 0)
+            {
+                TitleScreenAndGameModeManager.Instance.RestartGame();
+            }
         }
     }
 }

@@ -2,7 +2,7 @@ namespace YK
 {
     public enum GameMode
     {
-        HPMod,
-        TimerMod
+        HealthGameMode,
+        TimerGameMode
     }
 }

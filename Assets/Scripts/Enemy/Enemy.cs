@@ -10,7 +10,7 @@ namespace YK
 
         [Header("Enemy Stats")]
         [SerializeField] private int _maxHealth;
-        private int _currentHealth;
+        [SerializeField] private int _currentHealth;
         [SerializeField] private float _disappearanceTime;
         [SerializeField] private int _scoreValue;
         //  ADD DAMAGE * DISSAPEARANCE TIME?
@@ -72,13 +72,13 @@ namespace YK
             }
         }
 
-        public int IncomingDamage { get; set; } = 10;
+        public int ImpactDamage { get; set; } = 10;
 
         public Enemy() { }
 
         public Enemy(int incomingDamage)
         {
-            IncomingDamage = incomingDamage;
+            ImpactDamage = incomingDamage;
         }
 
         protected void Start()
@@ -88,7 +88,7 @@ namespace YK
 
         protected void OnMouseDown()
         {
-            ApplyDamage(IncomingDamage);
+            ApplyDamage(ImpactDamage);
         }
 
         public void ApplyDamage(int damageValue)

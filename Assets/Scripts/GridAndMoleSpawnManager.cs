@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace YK
 {
-    public class Spawner : MonoBehaviour
+    public class GridAndMoleSpawnManager : MonoBehaviour
     {
         private List<Transform> _gridTransforms = new List<Transform>();
-
-        private EventManager _eventManager;
 
         [SerializeField] private GameObject _gridPrefab;
         [SerializeField] private List<GameObject> _molePrefab;
@@ -81,9 +79,9 @@ namespace YK
             }
         }
 
-        private IEnumerator DestroyMoleAfterDelay(GameObject mole, float destoyTime)
+        private IEnumerator DestroyMoleAfterDelay(GameObject mole, float destroyTime)
         {
-            yield return new WaitForSeconds(destoyTime);
+            yield return new WaitForSeconds(destroyTime);
 
             // Удаляем префаб после задержки, но только если он был создан
             if (mole != null)
