@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d042c03ef47974f943dbdebdfd8bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 1000
   time: 60
 --- !u!1 &1220407656
 GameObject:
@@ -1953,6 +1953,7 @@ MonoBehaviour:
   _rowValue: 3
   _columnValue: 3
   _moleAnount: 2
+  _firstMoleSpawnTimer: 0.1
 --- !u!1 &1639049645
 GameObject:
   m_ObjectHideFlags: 0

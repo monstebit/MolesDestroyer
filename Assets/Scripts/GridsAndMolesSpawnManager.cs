@@ -23,13 +23,17 @@ namespace YK
 
         [Header("Coroutine Time")]
         //  TO DO: FIX IT
-        private float _firstMoleSpawnTimer = 2f;
+        [SerializeField] private float _firstMoleSpawnTimer = 0.5f;
+        private float _moleSpawnTimer = 2.5f;
         private float _restoreMoleSpawnPointTimer = 2.5f;
 
         private void Start()
         {
             SpawnGrids();
-            StartCoroutine(FirstMoleSpawnAfterDelay()); //  TO DO: FIX IT
+            //StartCoroutine(FirstMoleSpawnAfterDelay()); 
+            //StartCoroutine(MolesSpawn());
+            StartCoroutine(FirstMoleSpawnAfterDelay());
+            StartCoroutine(MolesSpawn());
         }
 
         private void SpawnGrids()
@@ -75,35 +79,42 @@ namespace YK
         //  COROUTINES
         private IEnumerator MolesSpawn()
         {
-            // ожидаем 1 секунду
-            yield return new WaitForSeconds(_firstMoleSpawnTimer);
-
-            for (int i = 0; i < _moleAnount; i++)
+            while (true)
             {
-                Transform randomSpawnPoint = GetRandomSpawnPoint();
+                yield return new WaitForSeconds(_moleSpawnTimer);
+                Debug.Log("ЦИКЛ Подождал: " + _moleSpawnTimer);
 
-                GameObject ramdomMole = GetRandomMole(_mole);
-                GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
+                for (int i = 0; i < _moleAnount; i++)
+                {
+                    if (_gridTransforms.Count != 0)
+                    {
+                        Transform randomSpawnPoint = GetRandomSpawnPoint();
 
-                //  GET ENEMY DISAPPEARANCE TIME
-                Enemy newMoplecomponent = moleInstance.GetComponent<Enemy>();   //  UPCASTING
-                float newMoleDisappearanceTime = newMoplecomponent.DisappearanceTime;
+                        GameObject ramdomMole = GetRandomMole(_mole);
+                        GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
 
-                //  DELETE LAST MOLE SPAWN POINT
-                _gridTransforms.Remove(randomSpawnPoint);
+                        //  GET ENEMY DISAPPEARANCE TIME
+                        Enemy newMoplecomponent = moleInstance.GetComponent<Enemy>();   //  UPCASTING
+                        float newMoleDisappearanceTime = newMoplecomponent.DisappearanceTime;
 
-                StartCoroutine(DestroyMoleAfterDelay(moleInstance, newMoleDisappearanceTime));
-                StartCoroutine(RestoreSpawnPointAfterDelay(randomSpawnPoint));
+                        //  DELETE LAST MOLE SPAWN POINT
+                        _gridTransforms.Remove(randomSpawnPoint);
+
+                        StartCoroutine(DestroyMoleAfterDelay(moleInstance, newMoleDisappearanceTime));
+                        StartCoroutine(RestoreSpawnPointAfterDelay(randomSpawnPoint));
+                    }
+                    else
+                    {
+                        //  TO DO?
+                    }
+                }
             }
         }
 
         private IEnumerator FirstMoleSpawnAfterDelay()
         {
-            while (true)
-            {
-                StartCoroutine(MolesSpawn());
-                yield return new WaitForSeconds(_firstMoleSpawnTimer);
-            }
+            yield return new WaitForSeconds(_firstMoleSpawnTimer);
+            //StartCoroutine(MolesSpawn());
         }
 
         private IEnumerator DestroyMoleAfterDelay(GameObject mole, float destroyTime)
@@ -128,6 +139,5 @@ namespace YK
             //  ADD SPAWN POINT BACK TO THE LIST
             _gridTransforms.Add(spawnPoint);
         }
-
     }
 }
