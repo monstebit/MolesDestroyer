@@ -12,8 +12,6 @@ namespace YK
 
         [SerializeField] private GameObject _spawnManager;
 
-        [SerializeField] int worldSceneIndex = 0;
-
         [Header("Buttons")]
         [SerializeField] private Button _healthModeButton;
         [SerializeField] private Button _timerModeButton;
@@ -40,7 +38,7 @@ namespace YK
             _spawnManager.SetActive(true);
         }
 
-        public void StartHPMod()
+        public void StartHealthGameMode()
         {
             currentGameMode = GameMode.HealthGameMode;
             Debug.Log("Game starts in Health Mode");
@@ -54,13 +52,13 @@ namespace YK
             ActivateGridAndMoleSpawner();
         }
 
-        public void StartTimerMod()
+        public void StartTimerGameMode()
         {
             currentGameMode = GameMode.TimerGameMode;
+            Debug.Log("Game starts in Timer Mode");
 
             _timerModeButton.Select();
 
-            Debug.Log("Game starts in Timer Mode");
 
             _scoreStatusBar.SetActive(false);
             _healthStatusBar.SetActive(false);
