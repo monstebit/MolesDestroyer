@@ -8,6 +8,9 @@ namespace YK
 {
     public class GridsAndMolesSpawnManager : MonoBehaviour
     {
+        [Header("Player Health Bar")]
+        [SerializeField] private PlayerHealthBar _healthBar;
+
         [Header("Prefab")]
         [SerializeField] private GameObject _grid;
         [SerializeField] private List<GameObject> _mole;
@@ -22,7 +25,6 @@ namespace YK
         [SerializeField] private int _moleAnount = 3;
 
         [Header("Coroutine Time")]
-        //  TO DO: FIX IT
         [SerializeField] private float _firstMoleSpawnTimer = 0.5f;
         private float _moleSpawnTimer = 2.5f;
         private float _restoreMoleSpawnPointTimer = 2.5f;
@@ -30,10 +32,8 @@ namespace YK
         private void Start()
         {
             SpawnGrids();
-            //StartCoroutine(FirstMoleSpawnAfterDelay()); 
-            //StartCoroutine(MolesSpawn());
-            StartCoroutine(FirstMoleSpawnAfterDelay());
-            StartCoroutine(MolesSpawn());
+            StartCoroutine(SpawnFirstMoleAfterDelay());
+            StartCoroutine(SpawnMoles());
         }
 
         private void SpawnGrids()
@@ -77,12 +77,11 @@ namespace YK
         }
 
         //  COROUTINES
-        private IEnumerator MolesSpawn()
+        private IEnumerator SpawnMoles()
         {
             while (true)
             {
                 yield return new WaitForSeconds(_moleSpawnTimer);
-                Debug.Log("ЦИКЛ Подождал: " + _moleSpawnTimer);
 
                 for (int i = 0; i < _moleAnount; i++)
                 {
@@ -103,30 +102,26 @@ namespace YK
                         StartCoroutine(DestroyMoleAfterDelay(moleInstance, newMoleDisappearanceTime));
                         StartCoroutine(RestoreSpawnPointAfterDelay(randomSpawnPoint));
                     }
-                    else
-                    {
-                        //  TO DO?
-                    }
                 }
             }
         }
 
-        private IEnumerator FirstMoleSpawnAfterDelay()
+        private IEnumerator SpawnFirstMoleAfterDelay()
         {
             yield return new WaitForSeconds(_firstMoleSpawnTimer);
-            //StartCoroutine(MolesSpawn());
         }
 
         private IEnumerator DestroyMoleAfterDelay(GameObject mole, float destroyTime)
         {
             yield return new WaitForSeconds(destroyTime);
 
-            // Удаляем префаб после задержки, но только если он был создан
+            //  DELETE PREFAB AFTER DELAY IF IS NOT NULL
             if (mole != null)
             {
                 //  ADD PLAYER DAMAGED EVENT
                 Enemy newMoplecomponent = mole.GetComponent<Enemy>();   //  UPCASTING
-                EventManager.OnPlayerDied(newMoplecomponent.MaxHealth);
+
+                _healthBar.ApplyDamage(newMoplecomponent.MaxHealth); //  DAMAGE PLAYER
 
                 Destroy(mole);
             }
@@ -139,5 +134,7 @@ namespace YK
             //  ADD SPAWN POINT BACK TO THE LIST
             _gridTransforms.Add(spawnPoint);
         }
+
+
     }
 }

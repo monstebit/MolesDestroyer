@@ -11,21 +11,21 @@ namespace YK
         
         void Start()
         {
-            EventManager.EnemyDied += OnEnemyDied;
+            EnemyEventManager.EnemyDied += Died;
 
             _scoreText.text = "SCORE: " + _score;
         }
 
         private void OnDestroy()
         {
-            EventManager.EnemyDied -= OnEnemyDied;
+            EnemyEventManager.EnemyDied -= Died;
         }
 
-        void OnEnemyDied(int scoreCount)
+        void Died(int scoreAmount)
         {
             if (_scoreText != null)
             {
-                _score += scoreCount;
+                _score += scoreAmount;
                 _scoreText.text = "SCORE: " + _score;
             }
         }

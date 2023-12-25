@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace YK
 {
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : MonoBehaviour, IDamageable
     {
         [Header("Particles")]
         [SerializeField] public ParticleSystem Explosion;
@@ -102,8 +102,9 @@ namespace YK
                 ParticlesExplode();
 
                 //  ADD SCORE
-                EventManager.OnEnemyDied(ScoreValue);
-                Debug.Log("+" + ScoreValue);
+                EnemyEventManager.OnEnemyDied(ScoreValue);
+                
+                Debug.Log("+" + _scoreValue);
             }
         }
 
