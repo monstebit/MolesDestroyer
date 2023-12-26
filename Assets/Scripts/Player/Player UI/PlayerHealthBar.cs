@@ -44,17 +44,18 @@ namespace YK
         private void Start()
         {
             _healthText.text = "HEALTH: " + _currentHealth.ToString();
-            Debug.Log("Current health is: " + _currentHealth);
         }
 
         public void ApplyDamage(int damageValue)
         {
             _currentHealth -= damageValue;
+            Debug.Log("-" + damageValue + " HEALTH POINTS!");
+
             _healthText.text = "HEALTH: " + _currentHealth;
 
             if (_currentHealth <= 0 )
             {
-                _healthText.text = "0";
+                _healthText.text = "";
 
                 TitleScreenAndGameModeManager.Instance.RestartGame();
             }

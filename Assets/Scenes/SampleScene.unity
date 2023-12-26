@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41d38ae2c4911f4f8fd8963dc60272f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 44
+  _maxHealth: 100
   _healthText: {fileID: 1070913728}
 --- !u!114 &1070913727
 MonoBehaviour:
@@ -1875,7 +1875,6 @@ MonoBehaviour:
   _rowValue: 3
   _columnValue: 3
   _moleAnount: 2
-  _firstMoleSpawnTimer: 0.1
 --- !u!1 &1639049645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,8 +2185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169fef33ca472e64383ab259139e5d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _remainingSeconds: 5
   _timerText: {fileID: 1777667683}
+  _timeDuration: 60
 --- !u!1 &2032925173
 GameObject:
   m_ObjectHideFlags: 0

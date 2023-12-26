@@ -25,14 +25,13 @@ namespace YK
         [SerializeField] private int _moleAnount = 3;
 
         [Header("Coroutine Time")]
-        [SerializeField] private float _firstMoleSpawnTimer = 0.5f;
-        private float _moleSpawnTimer = 2.5f;
+        private float _firstMoleSpawnTimer = 1;
+        private float _moleSpawnTimer = 2.0f;
         private float _restoreMoleSpawnPointTimer = 2.5f;
 
         private void Start()
         {
             SpawnGrids();
-            StartCoroutine(SpawnFirstMoleAfterDelay());
             StartCoroutine(SpawnMoles());
         }
 
@@ -79,6 +78,8 @@ namespace YK
         //  COROUTINES
         private IEnumerator SpawnMoles()
         {
+            yield return new WaitForSeconds(_firstMoleSpawnTimer);
+
             while (true)
             {
                 yield return new WaitForSeconds(_moleSpawnTimer);
@@ -106,11 +107,6 @@ namespace YK
             }
         }
 
-        private IEnumerator SpawnFirstMoleAfterDelay()
-        {
-            yield return new WaitForSeconds(_firstMoleSpawnTimer);
-        }
-
         private IEnumerator DestroyMoleAfterDelay(GameObject mole, float destroyTime)
         {
             yield return new WaitForSeconds(destroyTime);
@@ -121,7 +117,10 @@ namespace YK
                 //  ADD PLAYER DAMAGED EVENT
                 Enemy newMoplecomponent = mole.GetComponent<Enemy>();   //  UPCASTING
 
-                _healthBar.ApplyDamage(newMoplecomponent.MaxHealth); //  DAMAGE PLAYER
+                if (TitleScreenAndGameModeManager.Instance.currentGameMode == GameMode.HealthGameMode)
+                {
+                    _healthBar.ApplyDamage(newMoplecomponent.MaxHealth); //  DAMAGE PLAYER
+                }
 
                 Destroy(mole);
             }
@@ -134,7 +133,5 @@ namespace YK
             //  ADD SPAWN POINT BACK TO THE LIST
             _gridTransforms.Add(spawnPoint);
         }
-
-
     }
 }
