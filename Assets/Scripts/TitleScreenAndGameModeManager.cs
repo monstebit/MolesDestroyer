@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace YK
 {
@@ -18,9 +19,9 @@ namespace YK
         [SerializeField] private Button _timerModeButton;
 
         [Header("Status Bars")]
-        [SerializeField] private GameObject _scoreStatusBar; 
-        [SerializeField] private GameObject _healthStatusBar; 
-        [SerializeField] private GameObject _timerStatusBar; 
+        [SerializeField] private TextMeshProUGUI _scoreStatusBar; 
+        [SerializeField] private TextMeshProUGUI _healthStatusBar; 
+        [SerializeField] private TextMeshProUGUI _timerStatusBar; 
 
         private void Awake()
         {
@@ -46,9 +47,9 @@ namespace YK
 
             _healthModeButton.Select();
 
-            _scoreStatusBar.SetActive(true);
-            _healthStatusBar.SetActive(true);
-            _timerStatusBar.SetActive(false);  
+            _scoreStatusBar.gameObject.SetActive(true);
+            _healthStatusBar.gameObject.SetActive(true);
+            _timerStatusBar.gameObject.SetActive(false);  
 
             ActivateGridsAndMoleSpawner();
         }
@@ -61,9 +62,9 @@ namespace YK
             _timerModeButton.Select();
 
 
-            _scoreStatusBar.SetActive(false);
-            _healthStatusBar.SetActive(false);
-            _timerStatusBar.SetActive(true);
+            _scoreStatusBar.gameObject.SetActive(false);
+            _healthStatusBar.gameObject.SetActive(false);
+            _timerStatusBar.gameObject.SetActive(true);
 
             ActivateGridsAndMoleSpawner();
         }

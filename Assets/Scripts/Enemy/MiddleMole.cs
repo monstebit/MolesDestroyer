@@ -5,7 +5,7 @@ namespace YK
         public MiddleMole()
         {
             MaxHealth = 20;
-            DisappearanceTime = 2.5f;
+            DisappearanceTime = 4.5f;
             ScoreValue = 20;
         }
 

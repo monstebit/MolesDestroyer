@@ -5,7 +5,7 @@ namespace YK
         public BigMole()
         {
             MaxHealth = 30;
-            DisappearanceTime = 3.5f;
+            DisappearanceTime = 5.5f;
             ScoreValue = 30;
         }
 

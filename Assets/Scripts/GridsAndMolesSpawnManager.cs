@@ -8,6 +8,8 @@ namespace YK
 {
     public class GridsAndMolesSpawnManager : MonoBehaviour
     {
+        [SerializeField] private float scaleChangeSpeed = 1f;
+
         [Header("Player Health Bar")]
         [SerializeField] private PlayerHealthBar _healthBar;
 
@@ -25,8 +27,8 @@ namespace YK
         [SerializeField] private int _moleAnount = 3;
 
         [Header("Coroutine Time")]
-        private float _firstMoleSpawnTimer = 1;
-        private float _moleSpawnTimer = 2.0f;
+        //private float _firstMoleSpawnTimer = 1.0f;
+        private float _moleSpawnTimer = 1.0f;
         private float _restoreMoleSpawnPointTimer = 2.5f;
 
         private void Start()
@@ -78,7 +80,7 @@ namespace YK
         //  COROUTINES
         private IEnumerator SpawnMoles()
         {
-            yield return new WaitForSeconds(_firstMoleSpawnTimer);
+            //yield return new WaitForSeconds(_firstMoleSpawnTimer);
 
             while (true)
             {
@@ -90,8 +92,14 @@ namespace YK
                     {
                         Transform randomSpawnPoint = GetRandomSpawnPoint();
 
+                        Quaternion rotation = Quaternion.Euler(0f, 180f, 0f);
                         GameObject ramdomMole = GetRandomMole(_mole);
-                        GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
+                        //GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
+                        GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, rotation);
+
+                        //  SCALE OVER TIME
+                        moleInstance.transform.localScale = Vector3.zero;
+                        StartCoroutine(ScaleOverTime(moleInstance));
 
                         //  GET ENEMY DISAPPEARANCE TIME
                         Enemy newMoplecomponent = moleInstance.GetComponent<Enemy>();   //  UPCASTING
@@ -101,7 +109,7 @@ namespace YK
                         _gridTransforms.Remove(randomSpawnPoint);
 
                         StartCoroutine(DestroyMoleAfterDelay(moleInstance, newMoleDisappearanceTime));
-                        StartCoroutine(RestoreSpawnPointAfterDelay(randomSpawnPoint));
+                        StartCoroutine(RestoreSpawnPointAfterDelay(moleInstance, randomSpawnPoint));
                     }
                 }
             }
@@ -126,12 +134,47 @@ namespace YK
             }
         }
 
-        private IEnumerator RestoreSpawnPointAfterDelay(Transform spawnPoint)
+        private IEnumerator RestoreSpawnPointAfterDelay(GameObject mole, Transform spawnPoint)
         {
-            yield return new WaitForSeconds(_restoreMoleSpawnPointTimer);
+            Enemy newMoplecomponent = mole.GetComponent<Enemy>();   //  UPCASTING
+
+            //yield return new WaitForSeconds(_restoreMoleSpawnPointTimer);
+            yield return new WaitForSeconds(newMoplecomponent.DisappearanceTime);
 
             //  ADD SPAWN POINT BACK TO THE LIST
             _gridTransforms.Add(spawnPoint);
+        }
+
+        IEnumerator ScaleOverTime(GameObject objToScale)
+        {
+            if (objToScale == null)
+            {
+                yield break; // Если объект уничтожен, выходим из корутины
+            }
+
+            float currentTime = 0f;
+            float duration = 2f; // Время изменения размера в секундах
+
+            Vector3 startScale = objToScale.transform.localScale;
+            Vector3 targetScale = Vector3.one; // Финальный размер
+
+            while (currentTime < duration)
+            {
+                if (objToScale == null)
+                {
+                    yield break; // Если объект уничтожен, выходим из корутины
+                }
+
+                objToScale.transform.localScale = Vector3.Lerp(startScale, targetScale, currentTime / duration);
+                currentTime += Time.deltaTime * scaleChangeSpeed;
+                yield return null;
+            }
+
+            // Убедитесь, что размер установлен в конечное значение точно
+            if (objToScale != null)
+            {
+                objToScale.transform.localScale = targetScale;
+            }
         }
     }
 }

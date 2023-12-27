@@ -5,7 +5,7 @@ namespace YK
         public SmallMole()
         {
             MaxHealth = 10;
-            DisappearanceTime = 1.5f;
+            DisappearanceTime = 3.5f;
             ScoreValue = 10;
         }
 
