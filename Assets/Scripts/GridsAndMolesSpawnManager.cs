@@ -1,13 +1,19 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace YK
 {
     public class GridsAndMolesSpawnManager : MonoBehaviour
     {
+        public CinemachineTargetGroup targetGroup; // Ссылка на CinemachineTargetGroup
+
+
+
         [SerializeField] private float scaleChangeSpeed = 1f;
 
         [Header("Player Health Bar")]
@@ -16,6 +22,7 @@ namespace YK
         [Header("Prefab")]
         [SerializeField] private GameObject _grid;
         [SerializeField] private List<GameObject> _mole;
+        [SerializeField] private GameObject _cube;
 
         [Header("Grid")]
         //  TO DO: ADD CHECK FOR NULL
@@ -43,6 +50,16 @@ namespace YK
 
             for (int i = 0; i < _rowValue; i++)
             {
+                if (i == 0)
+                {
+                    //  FIRST TARGET FOR CINEMACHINE
+                    GameObject firstCubeInstance = Instantiate(_cube);
+                    firstCubeInstance.transform.position = new Vector3(0, 0, 0);
+
+                    // Добавляем созданный объект в CinemachineTargetGroup
+                    targetGroup.AddMember(firstCubeInstance.transform, 1.0f, 0);
+                }
+
                 for (int j = 0; j < _columnValue; j++)
                 {
                     GameObject gridInstance = Instantiate(_grid);
@@ -53,6 +70,17 @@ namespace YK
                     grids[i, j] = gridInstance;
                 }
             }
+
+            //  SECOND TARGET FOR CINEMACHINE
+            GameObject secondCubeInstance = Instantiate(_cube);
+
+            Transform lastTransform = GridTransforms[GridTransforms.Count - 1];
+            Vector3 lastTransformPosition = lastTransform.position;
+
+            secondCubeInstance.transform.position = lastTransformPosition;
+
+            // Добавляем созданный объект в CinemachineTargetGroup
+            targetGroup.AddMember(secondCubeInstance.transform, 1.0f, 0);
         }
 
         private GameObject GetRandomMole(List<GameObject> moles)
