@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5894830116041569456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5894830116041569469}
+  - component: {fileID: 5894830116041569468}
+  m_Layer: 0
+  m_Name: Grids & Moles Spawn Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5894830116041569469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894830116041569456}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5894830116041569468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894830116041569456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9733347ab2bbe644a556b1d83babd57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleChangeSpeed: 1
+  _healthBar: {fileID: 0}
+  _grid: {fileID: 7109978327368653945, guid: b21c0d20262affe4da3d987cdbd90ece, type: 3}
+  _mole:
+  - {fileID: 188894, guid: 653790fca342c264c9c0c9690f8d9d53, type: 3}
+  - {fileID: 4539774046751221381, guid: 34b5566d482deaf478a7b19cbf565690, type: 3}
+  - {fileID: 4234337510616468481, guid: 758ce5e93b2782a4ab1856f05f2d6815, type: 3}
+  _rowValue: 4
+  _columnValue: 4
+  _moleAnount: 3
