@@ -19,7 +19,7 @@ namespace YK
 
         [Header("Grid")]
         //  TO DO: ADD CHECK FOR NULL
-        private List<Transform> _gridTransforms = new List<Transform>();
+        public List<Transform> GridTransforms = new List<Transform>();
         [SerializeField] private int _rowValue = 3;
         [SerializeField] private int _columnValue = 3;
 
@@ -48,7 +48,7 @@ namespace YK
                     GameObject gridInstance = Instantiate(_grid);
 
                     gridInstance.transform.position = new Vector3(i * 2.0f, 0, j * 2.0f);
-                    _gridTransforms.Add(gridInstance.transform);
+                    GridTransforms.Add(gridInstance.transform);
 
                     grids[i, j] = gridInstance;
                 }
@@ -71,8 +71,8 @@ namespace YK
 
         private Transform GetRandomSpawnPoint()
         {
-            int randomIndex = Random.Range(0, _gridTransforms.Count);
-            Transform randomTransform = _gridTransforms[randomIndex]; 
+            int randomIndex = Random.Range(0, GridTransforms.Count);
+            Transform randomTransform = GridTransforms[randomIndex]; 
 
             return randomTransform;
         }
@@ -88,7 +88,7 @@ namespace YK
 
                 for (int i = 0; i < _moleAnount; i++)
                 {
-                    if (_gridTransforms.Count != 0)
+                    if (GridTransforms.Count != 0)
                     {
                         Transform randomSpawnPoint = GetRandomSpawnPoint();
 
@@ -106,7 +106,7 @@ namespace YK
                         float newMoleDisappearanceTime = newMoplecomponent.DisappearanceTime;
 
                         //  DELETE LAST MOLE SPAWN POINT
-                        _gridTransforms.Remove(randomSpawnPoint);
+                        GridTransforms.Remove(randomSpawnPoint);
 
                         StartCoroutine(DestroyMoleAfterDelay(moleInstance, newMoleDisappearanceTime));
                         StartCoroutine(RestoreSpawnPointAfterDelay(moleInstance, randomSpawnPoint));
@@ -142,7 +142,7 @@ namespace YK
             yield return new WaitForSeconds(newMoplecomponent.DisappearanceTime);
 
             //  ADD SPAWN POINT BACK TO THE LIST
-            _gridTransforms.Add(spawnPoint);
+            GridTransforms.Add(spawnPoint);
         }
 
         IEnumerator ScaleOverTime(GameObject objToScale)
