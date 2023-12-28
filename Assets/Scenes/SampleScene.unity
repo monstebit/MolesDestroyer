@@ -680,7 +680,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &734450345
 GameObject:
@@ -748,7 +748,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1194,7 +1194,7 @@ RectTransform:
   m_Children:
   - {fileID: 205840190}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1432,7 +1432,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1498670266
 GameObject:
@@ -1804,7 +1804,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1637382075
 MonoBehaviour:
@@ -1822,7 +1822,7 @@ MonoBehaviour:
   _healthBar: {fileID: 1070913726}
   _grid: {fileID: 7109978327368653945, guid: b21c0d20262affe4da3d987cdbd90ece, type: 3}
   _mole:
-  - {fileID: 8343395192941160300, guid: 7435b945f33eb644b9a05b8311ec5704, type: 3}
+  - {fileID: 188894, guid: 653790fca342c264c9c0c9690f8d9d53, type: 3}
   - {fileID: 4539774046751221381, guid: 34b5566d482deaf478a7b19cbf565690, type: 3}
   - {fileID: 4234337510616468481, guid: 758ce5e93b2782a4ab1856f05f2d6815, type: 3}
   _rowValue: 4
@@ -2237,7 +2237,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2128224643
 MonoBehaviour:
@@ -2456,7 +2456,7 @@ RectTransform:
   - {fileID: 649564634}
   - {fileID: 1220407657}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
