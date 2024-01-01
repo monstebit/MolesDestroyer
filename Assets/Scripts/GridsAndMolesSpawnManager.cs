@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace YK
@@ -11,8 +10,6 @@ namespace YK
     public class GridsAndMolesSpawnManager : MonoBehaviour
     {
         public CinemachineTargetGroup targetGroup; // Ссылка на CinemachineTargetGroup
-
-
 
         [SerializeField] private float scaleChangeSpeed = 1f;
 
@@ -34,9 +31,7 @@ namespace YK
         [SerializeField] private int _moleAnount = 3;
 
         [Header("Coroutine Time")]
-        //private float _firstMoleSpawnTimer = 1.0f;
         private float _moleSpawnTimer = 1.0f;
-        private float _restoreMoleSpawnPointTimer = 2.5f;
 
         private void Start()
         {
@@ -55,6 +50,7 @@ namespace YK
                     //  FIRST TARGET FOR CINEMACHINE
                     GameObject firstCubeInstance = Instantiate(_cube);
                     firstCubeInstance.transform.position = new Vector3(0, 0, 0);
+                    firstCubeInstance.SetActive(false);
 
                     // Добавляем созданный объект в CinemachineTargetGroup
                     targetGroup.AddMember(firstCubeInstance.transform, 1.0f, 0);
@@ -73,6 +69,7 @@ namespace YK
 
             //  SECOND TARGET FOR CINEMACHINE
             GameObject secondCubeInstance = Instantiate(_cube);
+            secondCubeInstance.SetActive(false);
 
             Transform lastTransform = GridTransforms[GridTransforms.Count - 1];
             Vector3 lastTransformPosition = lastTransform.position;
@@ -108,8 +105,6 @@ namespace YK
         //  COROUTINES
         private IEnumerator SpawnMoles()
         {
-            //yield return new WaitForSeconds(_firstMoleSpawnTimer);
-
             while (true)
             {
                 yield return new WaitForSeconds(_moleSpawnTimer);
@@ -122,7 +117,6 @@ namespace YK
 
                         Quaternion rotation = Quaternion.Euler(0f, 180f, 0f);
                         GameObject ramdomMole = GetRandomMole(_mole);
-                        //GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, randomSpawnPoint.rotation);
                         GameObject moleInstance = Instantiate(ramdomMole, randomSpawnPoint.position, rotation);
 
                         //  SCALE OVER TIME
@@ -166,7 +160,6 @@ namespace YK
         {
             Enemy newMoplecomponent = mole.GetComponent<Enemy>();   //  UPCASTING
 
-            //yield return new WaitForSeconds(_restoreMoleSpawnPointTimer);
             yield return new WaitForSeconds(newMoplecomponent.DisappearanceTime);
 
             //  ADD SPAWN POINT BACK TO THE LIST

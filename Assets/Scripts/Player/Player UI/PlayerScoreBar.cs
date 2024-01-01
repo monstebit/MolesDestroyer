@@ -8,25 +8,28 @@ namespace YK
         [SerializeField] private TextMeshProUGUI _scoreText;
 
         private int _score = 0;
-        
+
+        private void OnEnable()
+        {
+            EnemyEventManager.EnemyDied += ScoreUpdate;
+        }
+
         void Start()
         {
-            EnemyEventManager.EnemyDied += Died;
-
-            _scoreText.text = "SCORE: " + _score;
+            _scoreText.text = $"SCORE: {_score}";
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            EnemyEventManager.EnemyDied -= Died;
+            EnemyEventManager.EnemyDied -= ScoreUpdate;
         }
 
-        void Died(int scoreAmount)
+        void ScoreUpdate(int scoreAmount)
         {
             if (_scoreText != null)
             {
                 _score += scoreAmount;
-                _scoreText.text = "SCORE: " + _score;
+                _scoreText.text = $"SCORE: {_score}";
             }
         }
     }

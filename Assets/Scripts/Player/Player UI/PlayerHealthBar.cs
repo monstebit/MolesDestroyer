@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace YK
 {
-    public class PlayerHealthBar : MonoBehaviour, IDamageable
+    public class PlayerHealthBar : MonoBehaviour
     {
         [SerializeField] private int _maxHealth;
         private int _currentHealth;
@@ -43,15 +43,15 @@ namespace YK
 
         private void Start()
         {
-            _healthText.text = "HEALTH: " + _currentHealth.ToString();
+            _healthText.text = $"HEALTH: {_currentHealth}";
         }
 
         public void ApplyDamage(int damageValue)
         {
             _currentHealth -= damageValue;
-            Debug.Log("-" + damageValue + " HEALTH POINTS!");
+            Debug.Log($"-{damageValue} HEALTH POINTS!");
 
-            _healthText.text = "HEALTH: " + _currentHealth;
+            _healthText.text = $"HEALTH: {_currentHealth}";
 
             if (_currentHealth <= 0 )
             {

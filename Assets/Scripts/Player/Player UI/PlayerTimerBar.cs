@@ -21,7 +21,8 @@ namespace SG
 
             while (timer > 0)
             {
-                _timerText.text = "TIME: " + Mathf.Round(timer).ToString();
+                //_timerText.text = "TIME: " + Mathf.Round(timer).ToString();
+                _timerText.text = $"TIME: {Mathf.Round(timer)}";
 
                 timer -= Time.deltaTime;
 
@@ -30,28 +31,5 @@ namespace SG
 
             TitleScreenAndGameModeManager.Instance.RestartGame();
         }
-
-
-
-        //[SerializeField] private float _remainingSeconds;
-        //[SerializeField] private TextMeshProUGUI _timerText;
-
-        //private void Start()
-        //{
-        //    _timerText.text = _remainingSeconds.ToString();
-        //}
-
-        //private void Update()
-        //{
-        //    if (_remainingSeconds > 0f)
-        //    {
-        //        _remainingSeconds -= Time.deltaTime;
-        //        _timerText.text = "TIME: " + Mathf.Round(_remainingSeconds).ToString();
-        //    }
-        //    else
-        //    {
-        //        TitleScreenAndGameModeManager.Instance.RestartGame();
-        //    }
-        //}
     }
 }

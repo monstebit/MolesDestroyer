@@ -1,13 +1,10 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace YK
 {
-    public abstract class Enemy : MonoBehaviour, IDamageable
+    public abstract class Enemy : MonoBehaviour
     {
-        [HideInInspector] private EnemySoundFXManager _soundFXManager;
-
         [Header("Particles")]
         [SerializeField] public ParticleSystem Explosion;
 
@@ -84,16 +81,9 @@ namespace YK
             ImpactDamage = incomingDamage;
         }
 
-        private void Awake()
-        {
-            _soundFXManager = GetComponent<EnemySoundFXManager>();
-        }
-
         protected void Start()
         {
             _currentHealth = MaxHealth;
-
-
         }
 
         protected void OnMouseDown()
@@ -105,9 +95,6 @@ namespace YK
         {
             _currentHealth -= damageValue;
             Debug.Log("Enemy current health is: " + _currentHealth);
-
-            //  PLAY APPLY DAMAGE SOUND FX
-            //_soundFXManager.PlayDestroySoundFX();
 
             if (_currentHealth <= 0)
             {
